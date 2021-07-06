@@ -1,10 +1,11 @@
 const db = require('mongoose');
+require('dotenv').config();
 
 // connection
-const connection = () => db.connect('mongodb+srv://admin:researchAdmin45@rs1.ffyjw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
+const connection = () => db.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
   if (error) {
     console.log(":::: attempting to reconnect to mongodb ::::")
-     setTimeout(() => {
+     return setTimeout(() => {
       connection();
      }, 3000);
   }
